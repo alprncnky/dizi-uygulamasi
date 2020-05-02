@@ -1,4 +1,5 @@
 import React from 'react';
+import { LocalizationProvider } from './src/resources/localizationContext';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -22,12 +23,14 @@ class App extends React.Component {
       </Tab.Navigator>
     )
     return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="TabScreen" component={TabScreen} />
-          <Stack.Screen name="Welcome" component={Welcome} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <LocalizationProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="TabScreen" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="TabScreen" component={TabScreen} />
+            <Stack.Screen name="Welcome" component={Welcome} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </LocalizationProvider>
     );
   }
 };

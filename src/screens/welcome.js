@@ -51,7 +51,7 @@ class Welcome extends React.Component {
                         <View style={{ flex:1, marginHorizontal:25, marginTop: 90, marginBottom: 30}}>
 
                             <View style={{ alignItems: 'center' }}>
-                                <Text allowFontScaling={true} style={{ color: MainVariables.appMainColor, fontSize: 50, paddingHorizontal: 10, fontFamily: 'FasterOne-Regular' }}>
+                                <Text allowFontScaling={true} style={styles.title}>
                                     {MainVariables.appName}
                                 </Text>
                             </View>
@@ -60,11 +60,11 @@ class Welcome extends React.Component {
                             (<Animatable.View key={'LoginComponentKey'} animation="pulse" easing="ease-out" style={{ flex: 1, marginTop: 60 }}>
                                 <Text style={styles.inputTitle}>Email</Text>
                                 <View style={styles.inputFieldContainer}>
-                                    <TextInput value={this.state.emailText} onChangeText={text => this.onChangeTextInput('emailText', text)} style={{ color: 'white' }} />
+                                    <TextInput value={this.state.emailText} onChangeText={text => this.onChangeTextInput('emailText', text)} style={styles.inputText} />
                                 </View>
                                 <Text style={styles.inputTitle}>Password</Text>
                                 <View style={styles.inputFieldContainer}>
-                                    <TextInput value={this.state.passwordText} onChangeText={text => this.onChangeTextInput('passwordText', text)} secureTextEntry={true} style={{ color: 'white' }} />
+                                    <TextInput value={this.state.passwordText} onChangeText={text => this.onChangeTextInput('passwordText', text)} secureTextEntry={true} style={styles.inputText} />
                                 </View>
                                 <TouchableOpacity onPress={() => this.onClickLogin()} activeOpacity={0.8} style={styles.loginButton}>
                                     <Text style={{ fontSize: 25, fontFamily: 'Poppins-Medium', paddingVertical: 2 }}>Login</Text>
@@ -73,34 +73,34 @@ class Welcome extends React.Component {
                             (<Animatable.View key={'SignUpComponentKey'} animation="pulse" easing="ease-out" style={{ flex: 1, marginTop: 60 }}>
                                 <Text style={styles.inputTitle}>UserName</Text>
                                 <View style={styles.inputFieldContainer}>
-                                    <TextInput value={this.state.userNameText} onChangeText={text => this.onChangeTextInput('userNameText', text)} style={{ color: 'white' }} />
+                                    <TextInput value={this.state.userNameText} onChangeText={text => this.onChangeTextInput('userNameText', text)} style={styles.inputText} />
                                 </View>
                                 <Text style={styles.inputTitle}>Email</Text>
                                 <View style={styles.inputFieldContainer}>
-                                    <TextInput value={this.state.emailText} onChangeText={text => this.onChangeTextInput('emailText', text)} style={{ color: 'white' }} />
+                                    <TextInput value={this.state.emailText} onChangeText={text => this.onChangeTextInput('emailText', text)} style={styles.inputText} />
                                 </View>
                                 <Text style={styles.inputTitle}>Password</Text>
                                 <View style={styles.inputFieldContainer}>
-                                    <TextInput value={this.state.passwordText} onChangeText={text => this.onChangeTextInput('passwordText', text)} secureTextEntry={true} style={{ color: 'white' }} />
+                                    <TextInput value={this.state.passwordText} onChangeText={text => this.onChangeTextInput('passwordText', text)} secureTextEntry={true} style={styles.inputText} />
                                 </View>
                                 <Text style={styles.inputTitle}>Confirm password</Text>
                                 <View style={styles.inputFieldContainer}>
-                                    <TextInput value={this.state.repasswordText} onChangeText={text => this.onChangeTextInput('repasswordText', text)} secureTextEntry={true} style={{ color: 'white' }} />
+                                    <TextInput value={this.state.repasswordText} onChangeText={text => this.onChangeTextInput('repasswordText', text)} secureTextEntry={true} style={styles.inputText} />
                                 </View>
                                 <TouchableOpacity activeOpacity={0.8} style={styles.loginButton}>
                                     <Text style={{ fontSize: 25, fontFamily: 'Poppins-Medium', paddingVertical: 2 }}>Sign</Text>
                                 </TouchableOpacity>
                             </Animatable.View>)}
 
-                            <TouchableOpacity onPress={() => this.onClickShown()}  activeOpacity={0.6} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 'auto', marginBottom: 0 }}>
+                            <TouchableOpacity onPress={() => this.onClickShown()}  activeOpacity={0.6} style={styles.bottomTextButton}>
                                 {this.state.isLoginShown?
                                     <>
-                                        <Text style={{ color: 'white', fontFamily: 'Poppins-SemiBold' }}>Dont have an account? </Text>
-                                        <Text style={{ color: 'white', fontFamily: 'Poppins-ExtraBold' }}> Sign Up</Text>
+                                        <Text style={styles.bottomText}>Dont have an account? </Text>
+                                        <Text style={styles.bottomText}> Sign Up</Text>
                                     </> :
                                     <>
-                                        <Text style={{ color: 'white', fontFamily: 'Poppins-SemiBold' }}>Back to </Text>
-                                        <Text style={{ color: 'white', fontFamily: 'Poppins-ExtraBold' }}>Login</Text>
+                                        <Text style={styles.bottomText}>Back to </Text>
+                                        <Text style={styles.bottomText}>Login</Text>
                                     </>
                                 }
                             </TouchableOpacity>
@@ -126,6 +126,12 @@ const styles = StyleSheet.create({
         opacity: 1, 
         zIndex: 2 
     },
+    title: {
+        color: MainVariables.appMainColor, 
+        fontSize: 50, 
+        paddingHorizontal: 10, 
+        fontFamily: 'FasterOne-Regular' 
+    },
     image: {
         width: windowWidth,
         height: windowHeight,
@@ -148,6 +154,20 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         borderRadius: 50, 
         marginTop: 10
+    },
+    inputText: {
+        color: 'white'
+    },
+    bottomTextButton: {
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        marginTop: 'auto', 
+        marginBottom: 0
+    },
+    bottomText: {
+        color: 'white', 
+        fontFamily: 'Poppins-SemiBold'
     }
 })
 
