@@ -18,8 +18,8 @@ class Home extends React.Component {
         <View style={{ flex: 1, backgroundColor: 'black' }} >
           <ScrollView>
               <View>
-                <Text allowFontScaling={true} style={{ color: MainVariables.appMainColor, fontSize: 40, paddingHorizontal: 10 }}>
-                  ₺ {MainVariables.appName}
+                <Text allowFontScaling={true} style={{ color: MainVariables.appMainColor, fontSize: 40, paddingHorizontal: 10, fontFamily: 'FasterOne-Regular' }}>
+                  {MainVariables.appName}
                 </Text>
               </View>
               
