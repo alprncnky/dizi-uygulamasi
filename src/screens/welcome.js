@@ -1,22 +1,42 @@
 import React from 'react';
 import { View, Text, ImageBackground, StyleSheet, SafeAreaView, StatusBar, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import MainVariables from '../main-variables.json';
+import * as Animatable from 'react-native-animatable';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 class Welcome extends React.Component {
+
+    initialState = {
+        userNameText: '',
+        emailText: '',
+        passwordText: '',
+        repasswordText: '',
+        isLoginShown: true
+    }
+
     constructor(props) {
         super(props);
-        this.state = {
-            emailText: '',
-            passwordText: '',
-            e: null
-        }
+        this.state = {...this.initialState}
     }
 
     onChangeTextInput = (name, text) => {
         this.setState({ [name]: text })
+    }
+
+    onClickShown = () => {
+        const initialStateValues = {...this.initialState};
+        initialStateValues.isLoginShown = !this.state.isLoginShown;
+        this.setState({ ...initialStateValues });
+    }
+
+    onClickLogin = () => {
+        alert('click login')
+    }
+
+    onClickSign = () => {
+        alert('click sign')
     }
 
     render() {
@@ -35,7 +55,9 @@ class Welcome extends React.Component {
                                     {MainVariables.appName}
                                 </Text>
                             </View>
-                            <View style={{ flex: 1, marginTop: 60 }}>
+
+                            {this.state.isLoginShown ?
+                            (<Animatable.View key={'LoginComponentKey'} animation="pulse" easing="ease-out" style={{ flex: 1, marginTop: 60 }}>
                                 <Text style={styles.inputTitle}>Email</Text>
                                 <View style={styles.inputFieldContainer}>
                                     <TextInput value={this.state.emailText} onChangeText={text => this.onChangeTextInput('emailText', text)} style={{ color: 'white' }} />
@@ -44,13 +66,43 @@ class Welcome extends React.Component {
                                 <View style={styles.inputFieldContainer}>
                                     <TextInput value={this.state.passwordText} onChangeText={text => this.onChangeTextInput('passwordText', text)} secureTextEntry={true} style={{ color: 'white' }} />
                                 </View>
-                                <TouchableOpacity activeOpacity={0.8} style={styles.loginButton}>
+                                <TouchableOpacity onPress={() => this.onClickLogin()} activeOpacity={0.8} style={styles.loginButton}>
                                     <Text style={{ fontSize: 25, fontFamily: 'Poppins-Medium', paddingVertical: 2 }}>Login</Text>
                                 </TouchableOpacity>
-                            </View>
-                            <TouchableOpacity activeOpacity={0.6} style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 'auto', marginBottom: 0 }}>
-                                <Text style={{ color: 'white', fontFamily: 'Poppins-SemiBold' }}>Dont have an account? </Text>
-                                <Text style={{ color: 'white', fontFamily: 'Poppins-Bold' }}> Sign Up</Text>
+                            </Animatable.View>) :
+                            (<Animatable.View key={'SignUpComponentKey'} animation="pulse" easing="ease-out" style={{ flex: 1, marginTop: 60 }}>
+                                <Text style={styles.inputTitle}>UserName</Text>
+                                <View style={styles.inputFieldContainer}>
+                                    <TextInput value={this.state.userNameText} onChangeText={text => this.onChangeTextInput('userNameText', text)} style={{ color: 'white' }} />
+                                </View>
+                                <Text style={styles.inputTitle}>Email</Text>
+                                <View style={styles.inputFieldContainer}>
+                                    <TextInput value={this.state.emailText} onChangeText={text => this.onChangeTextInput('emailText', text)} style={{ color: 'white' }} />
+                                </View>
+                                <Text style={styles.inputTitle}>Password</Text>
+                                <View style={styles.inputFieldContainer}>
+                                    <TextInput value={this.state.passwordText} onChangeText={text => this.onChangeTextInput('passwordText', text)} secureTextEntry={true} style={{ color: 'white' }} />
+                                </View>
+                                <Text style={styles.inputTitle}>Confirm password</Text>
+                                <View style={styles.inputFieldContainer}>
+                                    <TextInput value={this.state.repasswordText} onChangeText={text => this.onChangeTextInput('repasswordText', text)} secureTextEntry={true} style={{ color: 'white' }} />
+                                </View>
+                                <TouchableOpacity activeOpacity={0.8} style={styles.loginButton}>
+                                    <Text style={{ fontSize: 25, fontFamily: 'Poppins-Medium', paddingVertical: 2 }}>Sign</Text>
+                                </TouchableOpacity>
+                            </Animatable.View>)}
+
+                            <TouchableOpacity onPress={() => this.onClickShown()}  activeOpacity={0.6} style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 'auto', marginBottom: 0 }}>
+                                {this.state.isLoginShown?
+                                    <>
+                                        <Text style={{ color: 'white', fontFamily: 'Poppins-SemiBold' }}>Dont have an account? </Text>
+                                        <Text style={{ color: 'white', fontFamily: 'Poppins-ExtraBold' }}> Sign Up</Text>
+                                    </> :
+                                    <>
+                                        <Text style={{ color: 'white', fontFamily: 'Poppins-SemiBold' }}>Back to </Text>
+                                        <Text style={{ color: 'white', fontFamily: 'Poppins-ExtraBold' }}>Login</Text>
+                                    </>
+                                }
                             </TouchableOpacity>
                         </View>
                     </View>
