@@ -6,18 +6,27 @@ import Home from './src/screens/home';
 import Search from './src/screens/search';
 import Profile from './src/screens/profile';
 import TabBar from './src/screens/components/tab-bar';
+import Welcome from './src/screens/welcome';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 class App extends React.Component {
+
   render() {
+    const TabScreen = () => (
+      <Tab.Navigator tabBar={props => <TabBar {...props} />} initialRouteName="Home" screenOptions={{ headerShown: false }}>
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Search" component={Search} />
+        <Tab.Screen name="Profile" component={Profile} />
+      </Tab.Navigator>
+    )
     return (
       <NavigationContainer>
-        <Tab.Navigator tabBar={props => <TabBar {...props} />} initialRouteName="Home" screenOptions={{ headerShown: false }}>
-          <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Search" component={Search} />
-          <Tab.Screen name="Profile" component={Profile} />
-        </Tab.Navigator>
+        <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="TabScreen" component={TabScreen} />
+          <Stack.Screen name="Welcome" component={Welcome} />
+        </Stack.Navigator>
       </NavigationContainer>
     );
   }
